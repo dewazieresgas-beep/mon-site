@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Accueil général</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <div>
+          <div class="brand-title">Intranet</div>
+          <div class="brand-sub">Accueil général</div>
+        </div>
+      </div>
+    </header>
+
+    <div id="navHost"></div>
+
+    <main class="card">
+      <section class="grid">
+        <div class="card kpi col-3">
+          <h3>Commandes bois (mois)</h3>
+          <div class="val">—</div>
+          <div class="sub">à connecter plus tard</div>
+        </div>
+        <div class="card kpi col-3">
+          <h3>Prix moyen (€/m³)</h3>
+          <div class="val">—</div>
+          <div class="sub">courbe à venir</div>
+        </div>
+        <div class="card kpi col-3">
+          <h3>OTD / Délais</h3>
+          <div class="val">—</div>
+          <div class="sub">indicateur global</div>
+        </div>
+        <div class="card kpi col-3">
+          <h3>Sécurité</h3>
+          <div class="val">—</div>
+          <div class="sub">événements / jours</div>
+        </div>
+
+        <div class="card panel col-8">
+          <h2>Management visuel (à alimenter)</h2>
+          <p class="muted">Zone prévue pour graphiques (prix bois, commandes, productivité…)</p>
+          <div class="note">Astuce : on pourra intégrer plus tard des graphiques (Chart.js) + saisie.</div>
+        </div>
+
+        <div class="card panel col-4">
+          <h2>Infos importantes</h2>
+          <ul class="muted">
+            <li>Message direction</li>
+            <li>Alertes / priorités</li>
+            <li>Rappels planning</li>
+          </ul>
+        </div>
+
+        <div class="card panel col-12">
+          <h2>Tableau de suivi (exemple)</h2>
+          <table class="table">
+            <thead>
+              <tr><th>Entreprise</th><th>Indicateur</th><th>Statut</th><th>Note</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Goudalle Charpente</td><td>Achats bois</td><td><span class="badge">à connecter</span></td><td>—</td></tr>
+              <tr><td>CBCO</td><td>Production</td><td><span class="badge">à connecter</span></td><td>—</td></tr>
+              <tr><td>BCHDF</td><td>Performance</td><td><span class="badge">à connecter</span></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer"><span class="muted">Maquette intranet</span></footer>
+  </div>
+
+  <script src="../app.js"></script>
+</body>
+</html>
