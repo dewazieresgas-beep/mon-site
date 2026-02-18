@@ -1,13 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mon premier site</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Intranet • Connexion</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Bienvenue sur mon site</h1>
-  <p>Site créé par Gaspard 🚀</p>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <div>
+          <div class="brand-title">Intranet</div>
+          <div class="brand-sub">Management visuel • Indicateurs • Saisie</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="card auth">
+      <h1>Connexion</h1>
+      <p class="muted">Maquette (accès simulé). Choisis un profil pour tester les droits.</p>
+
+      <label class="label">Profil</label>
+      <select id="roleSelect" class="input">
+        <option value="direction">Direction (accès à tout)</option>
+        <option value="gc">Goudalle Charpente</option>
+        <option value="cbco">CBCO</option>
+        <option value="gm">Goudalle Maçonnerie</option>
+        <option value="sylve">SYLVE Support</option>
+        <option value="bchdf">BCHDF</option>
+      </select>
+
+      <label class="label">Identifiant (optionnel)</label>
+      <input id="username" class="input" placeholder="ex : prenom.nom" />
+
+      <button class="btn" id="loginBtn">Se connecter</button>
+
+      <div class="note">
+        <strong>Rappel :</strong> GitHub Pages ne sécurise pas un intranet. Ici, on simule juste l’expérience.
+      </div>
+    </main>
+
+    <footer class="footer">
+      <span class="muted">© Intranet • Maquette</span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      const role = document.getElementById("roleSelect").value;
+      const username = document.getElementById("username").value.trim();
+      window.IntranetAuth.login({ role, username });
+      // Après login → accueil général
+      window.location.href = "./pages/accueil.html";
+    });
+  </script>
 </body>
 </html>
