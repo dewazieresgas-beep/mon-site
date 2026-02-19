@@ -122,12 +122,12 @@ function setLogo() {
   if (!img) return;
 
   const map = {
-    "accueil.html": "../Assets/Logos/groupe.png",
-    "goudalle-charpente.html": "../Assets/Logos/goudalle-charpente.png",
-    "cbco.html": "../Assets/Logos/cbco.png",
-    "goudalle-maconnerie.html": "../Assets/Logos/goudalle-maconnerie.png",
-    "sylve-support.html": "../Assets/Logos/sylve-support.png",
-    "bchdf.html": "../Assets/Logos/bchdf.png",
+    "accueil.html": "../assets/logos/groupe.png",
+    "goudalle-charpente.html": "../assets/logos/goudalle-charpente.png",
+    "cbco.html": "../assets/logos/cbco.png",
+    "goudalle-maconnerie.html": "../assets/logos/goudalle-maconnerie.png",
+    "sylve-support.html": "../assets/logos/sylve-support.png",
+    "bchdf.html": "../assets/logos/bchdf.png",
   };
 
   const entry = Object.entries(map).find(([key]) => path.includes(key));
