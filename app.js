@@ -116,26 +116,32 @@
     window.addEventListener("DOMContentLoaded", mountNav);
   }
 })();
-function setlogo() {
-  const path = window.location.pathname.toLowerCase();
-  const img = document.getElementById("companylogo");
+function setLogo() {
+  const img = document.getElementById("companyLogo");
   if (!img) return;
 
+  const page = window.location.pathname.toLowerCase();
+
   const map = {
-    "accueil.html": "../assets/logos/groupe.png",
-    "goudalle-charpente.html": "../assets/logos/goudalle-charpente.png",
-    "cbco.html": "../assets/logos/cbco.png",
-    "goudalle-maconnerie.html": "../assets/logos/goudalle-maconnerie.png",
-    "sylve-support.html": "../assets/logos/sylve-support.png",
-    "bchdf.html": "../assets/logos/bchdf.png",
+    "accueil.html": "/mon-site/assets/logos/groupe.png",
+    "goudalle-charpente.html": "/mon-site/assets/logos/goudalle-charpente.png",
+    "cbco.html": "/mon-site/assets/logos/cbco.png",
+    "goudalle-maconnerie.html": "/mon-site/assets/logos/goudalle-maconnerie.png",
+    "sylve-support.html": "/mon-site/assets/logos/sylve-support.png",
+    "bchdf.html": "/mon-site/assets/logos/bchdf.png",
   };
 
-  const entry = Object.entries(map).find(([key]) => path.includes(key));
+  const entry = Object.entries(map).find(([k]) => page.includes(k));
   if (!entry) { img.style.display = "none"; return; }
 
   img.src = entry[1];
   img.style.display = "block";
-  img.onerror = () => { img.style.display = "none"; };
+
+  // Debug utile si un fichier manque
+  img.onerror = () => {
+    img.style.display = "none";
+    console.warn("Logo introuvable:", entry[1]);
+  };
 }
 
-window.addEventListener("DOMContentLoaded", setlogo);
+window.addEventListener("DOMContentLoaded", setLogo);

@@ -157,6 +157,7 @@ h1,h2{margin:0 0 10px}
 .company-logo{
   height: auto;
   width: auto;
-  max-height: none;
-  max-width: none;
+  max-height: 70px;
+  max-width: 260px;
+  object-fit: contain;
 }
