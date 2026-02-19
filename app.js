@@ -116,9 +116,9 @@
     window.addEventListener("DOMContentLoaded", mountNav);
   }
 })();
-function setLogo() {
+function setlogo() {
   const path = window.location.pathname.toLowerCase();
-  const img = document.getElementById("companyLogo");
+  const img = document.getElementById("companylogo");
   if (!img) return;
 
   const map = {
@@ -138,4 +138,4 @@ function setLogo() {
   img.onerror = () => { img.style.display = "none"; };
 }
 
-window.addEventListener("DOMContentLoaded", setLogo);
+window.addEventListener("DOMContentLoaded", setlogo);
