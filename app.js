@@ -1,4 +1,9 @@
-(function () {
+(() => {
+  "use strict";
+
+  // =========================
+  // Session (login simulé)
+  // =========================
   const KEY = "intranet_session_v1";
 
   const roleToLabel = {
@@ -20,8 +25,11 @@
   };
 
   function getSession() {
-    try { return JSON.parse(localStorage.getItem(KEY) || "null"); }
-    catch { return null; }
+    try {
+      return JSON.parse(localStorage.getItem(KEY) || "null");
+    } catch {
+      return null;
+    }
   }
 
   function setSession(session) {
@@ -30,12 +38,16 @@
 
   function logout() {
     localStorage.removeItem(KEY);
+    // depuis /pages/* on remonte d’un niveau
     window.location.href = "../index.html";
   }
 
   function requireAuth() {
     const s = getSession();
-    if (!s || !s.role) window.location.href = "../index.html";
+    if (!s || !s.role) {
+      window.location.href = "../index.html";
+      return null;
+    }
     return s;
   }
 
@@ -52,12 +64,13 @@
 
   function enforceAccess() {
     const s = requireAuth();
+    if (!s) return;
+
     const key = pageKeyFromPath(window.location.pathname);
     if (!key) return;
 
     const allowed = roleToAllowedPages[s.role] || [];
     if (!allowed.includes(key)) {
-      // Redirige vers l'accueil si pas autorisé
       window.location.href = "./accueil.html";
     }
   }
@@ -74,8 +87,10 @@
       { key: "bchdf", label: "BCHDF", href: "./bchdf.html" },
     ];
 
-    const filtered = links.filter(l => allowed.includes(l.key));
-    const items = filtered.map(l => `<a href="${l.href}">${l.label}</a>`).join("");
+    const items = links
+      .filter((l) => allowed.includes(l.key))
+      .map((l) => `<a href="${l.href}">${l.label}</a>`)
+      .join("");
 
     const who = roleToLabel[session.role] || session.role;
     const user = session.username ? `• ${session.username}` : "";
@@ -93,8 +108,11 @@
 
   function mountNav() {
     const session = requireAuth();
+    if (!session) return;
+
     const host = document.getElementById("navHost");
     if (!host) return;
+
     host.innerHTML = navHTML(session);
 
     const btn = document.getElementById("logoutBtn");
@@ -110,40 +128,48 @@
     logout,
   };
 
-  // Auto-protect pages
-  if (window.location.pathname.includes("/pages/")) {
+  // =========================
+  // Logo (automatique)
+  // =========================
+  function setLogo() {
+    const img = document.getElementById("companylogo");
+    if (!img) return;
+
+    // nom de fichier actuel (ex: "cbco.html")
+    const file = (window.location.pathname.split("/").pop() || "").toLowerCase();
+
+    const map = {
+      "accueil.html": "groupe.png",
+      "goudalle-charpente.html": "goudalle-charpente.png",
+      "cbco.html": "cbco.png",
+      "goudalle-maconnerie.html": "goudalle-maconnerie.png",
+      "sylve-support.html": "sylve-support.png",
+      "bchdf.html": "bchdf.png",
+    };
+
+    const logoFile = map[file];
+    if (!logoFile) {
+      img.style.display = "none";
+      return;
+    }
+
+    // Chemin absolu (fiable sur GitHub Pages)
+    img.src = "/mon-site/assets/logos/" + logoFile;
+    img.style.display = "block";
+
+    img.onerror = () => {
+      console.warn("logo introuvable:", img.src, "page:", file);
+    };
+  }
+
+  // =========================
+  // Boot (pages uniquement)
+  // =========================
+  if (window.location.pathname.toLowerCase().includes("/pages/")) {
     enforceAccess();
-    window.addEventListener("DOMContentLoaded", mountNav);
+    window.addEventListener("DOMContentLoaded", () => {
+      mountNav();
+      setLogo();
+    });
   }
 })();
-function setlogo() {
-  const img = document.getElementById("companylogo");
-  if (!img) return;
-
-  // récupère juste le nom du fichier de la page (ex: "goudalle-maconnerie.html")
-  const file = window.location.pathname.split("/").pop().toLowerCase();
-
-  const map = {
-    "accueil.html": "groupe.png",
-    "goudalle-charpente.html": "goudalle-charpente.png",
-    "cbco.html": "cbco.png",
-    "goudalle-maconnerie.html": "goudalle-maconnerie.png",
-    "sylve-support.html": "sylve-support.png",
-    "bchdf.html": "bchdf.png",
-  };
-
-  const logoFile = map[file];
-  if (!logoFile) {
-    img.style.display = "none";
-    return;
-  }
-
-  // chemin ABSOLU (stable sur github pages)
-  img.src = "/mon-site/assets/logos/" + logoFile;
-
-  img.onerror = () => {
-    console.warn("logo introuvable:", img.src);
-  };
-}
-
-window.addEventListener("DOMContentLoaded", setlogo);
