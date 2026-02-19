@@ -154,3 +154,9 @@ h1,h2{margin:0 0 10px}
   .col-3,.col-4,.col-6,.col-8{grid-column: span 12}
   .nav .pill{margin-left:0; width:100%; justify-content:space-between}
 }
+.company-logo{
+  height: auto;
+  width: auto;
+  max-height: none;
+  max-width: none;
+}

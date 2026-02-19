@@ -116,3 +116,26 @@
     window.addEventListener("DOMContentLoaded", mountNav);
   }
 })();
+function setLogo() {
+  const path = window.location.pathname.toLowerCase();
+  const img = document.getElementById("companyLogo");
+  if (!img) return;
+
+  const map = {
+    "accueil.html": "../Assets/Logos/groupe.png",
+    "goudalle-charpente.html": "../Assets/Logos/goudalle-charpente.png",
+    "cbco.html": "../Assets/Logos/cbco.png",
+    "goudalle-maconnerie.html": "../Assets/Logos/goudalle-maconnerie.png",
+    "sylve-support.html": "../Assets/Logos/sylve-support.png",
+    "bchdf.html": "../Assets/Logos/bchdf.png",
+  };
+
+  const entry = Object.entries(map).find(([key]) => path.includes(key));
+  if (!entry) { img.style.display = "none"; return; }
+
+  img.src = entry[1];
+  img.style.display = "block";
+  img.onerror = () => { img.style.display = "none"; };
+}
+
+window.addEventListener("DOMContentLoaded", setLogo);
