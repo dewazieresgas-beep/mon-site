@@ -15,7 +15,7 @@
     bchdf: "BCHDF",
   };
 
-  const roleToAllowedPages = {
+  const roleToAllowedpages = {
     direction: ["accueil", "gc", "cbco", "gm", "sylve", "bchdf"],
     gc: ["accueil", "gc"],
     cbco: ["accueil", "cbco"],
@@ -69,14 +69,14 @@
     const key = pageKeyFromPath(window.location.pathname);
     if (!key) return;
 
-    const allowed = roleToAllowedPages[s.role] || [];
+    const allowed = roleToAllowedpages[s.role] || [];
     if (!allowed.includes(key)) {
       window.location.href = "./accueil.html";
     }
   }
 
   function navHTML(session) {
-    const allowed = roleToAllowedPages[session.role] || [];
+    const allowed = roleToAllowedpages[session.role] || [];
 
     const links = [
       { key: "accueil", label: "Accueil général", href: "./accueil.html" },
@@ -137,6 +137,9 @@
 
     // nom de fichier actuel (ex: "cbco.html")
     const file = (window.location.pathname.split("/").pop() || "").toLowerCase();
+    const sub = document.querySelector(".brand-sub");
+if (sub) sub.textContent = sub.textContent + " • " + file;
+
 
     const map = {
       "accueil.html": "groupe.png",
@@ -153,8 +156,10 @@
       return;
     }
 
-    // Chemin absolu (fiable sur GitHub Pages)
-    img.src = "/mon-site/assets/logos/" + logoFile;
+    // Chemin absolu (fiable sur GitHub pages)
+    const base = "/mon-site/assets/logos/" + logoFile;
+// évite le cache (utile si 1 seul logo refuse de se mettre à jour)
+img.src = base + "?v=" + Date.now();
     img.style.display = "block";
 
     img.onerror = () => {
