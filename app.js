@@ -116,32 +116,34 @@
     window.addEventListener("DOMContentLoaded", mountNav);
   }
 })();
-function setLogo() {
-  const img = document.getElementById("companyLogo");
+function setlogo() {
+  const img = document.getElementById("companylogo");
   if (!img) return;
 
-  const page = window.location.pathname.toLowerCase();
+  // récupère juste le nom du fichier de la page (ex: "goudalle-maconnerie.html")
+  const file = window.location.pathname.split("/").pop().toLowerCase();
 
   const map = {
-    "accueil.html": "/mon-site/assets/logos/groupe.png",
-    "goudalle-charpente.html": "/mon-site/assets/logos/goudalle-charpente.png",
-    "cbco.html": "/mon-site/assets/logos/cbco.png",
-    "goudalle-maconnerie.html": "/mon-site/assets/logos/goudalle-maconnerie.png",
-    "sylve-support.html": "/mon-site/assets/logos/sylve-support.png",
-    "bchdf.html": "/mon-site/assets/logos/bchdf.png",
+    "accueil.html": "groupe.png",
+    "goudalle-charpente.html": "goudalle-charpente.png",
+    "cbco.html": "cbco.png",
+    "goudalle-maconnerie.html": "goudalle-maconnerie.png",
+    "sylve-support.html": "sylve-support.png",
+    "bchdf.html": "bchdf.png",
   };
 
-  const entry = Object.entries(map).find(([k]) => page.includes(k));
-  if (!entry) { img.style.display = "none"; return; }
-
-  img.src = entry[1];
-  img.style.display = "block";
-
-  // Debug utile si un fichier manque
-  img.onerror = () => {
+  const logoFile = map[file];
+  if (!logoFile) {
     img.style.display = "none";
-    console.warn("Logo introuvable:", entry[1]);
+    return;
+  }
+
+  // chemin ABSOLU (stable sur github pages)
+  img.src = "/mon-site/assets/logos/" + logoFile;
+
+  img.onerror = () => {
+    console.warn("logo introuvable:", img.src);
   };
 }
 
-window.addEventListener("DOMContentLoaded", setLogo);
+window.addEventListener("DOMContentLoaded", setlogo);
