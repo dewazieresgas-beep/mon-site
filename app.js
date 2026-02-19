@@ -9,7 +9,7 @@
   const roleToLabel = {
     direction: "Direction",
     gc: "Goudalle Charpente",
-    cbco: "CBCO",
+    cbco: "cbco",
     gm: "Goudalle Maçonnerie",
     sylve: "SYLVE Support",
     bchdf: "BCHDF",
@@ -81,7 +81,7 @@
     const links = [
       { key: "accueil", label: "Accueil général", href: "./accueil.html" },
       { key: "gc", label: "Goudalle Charpente", href: "./goudalle-charpente.html" },
-      { key: "cbco", label: "CBCO", href: "./cbco.html" },
+      { key: "cbco", label: "cbco", href: "./cbco.html" },
       { key: "gm", label: "Goudalle Maçonnerie", href: "./goudalle-maconnerie.html" },
       { key: "sylve", label: "SYLVE Support", href: "./sylve-support.html" },
       { key: "bchdf", label: "BCHDF", href: "./bchdf.html" },
