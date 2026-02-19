@@ -132,7 +132,9 @@
   // Logo (automatique)
   // =========================
   function setLogo() {
-    const img = document.getElementById("companylogo");
+    const img =
+  document.getElementById("companylogo") ||
+  document.getElementById("companyLogo");
     if (!img) return;
 
     // nom de fichier actuel (ex: "cbco.html")
